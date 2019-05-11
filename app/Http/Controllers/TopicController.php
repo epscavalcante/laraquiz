@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Topic;
 use Illuminate\Http\Request;
+use App\Http\Requests\TopicRequest;
 
 class TopicController extends Controller
 {
@@ -14,7 +15,7 @@ class TopicController extends Controller
      */
     public function index()
     {
-        //
+        return view('topics.index')->with(['topics' => Topic::all()]);
     }
 
     /**
@@ -33,9 +34,10 @@ class TopicController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TopicRequest $request)
     {
-        //
+        Topic::create($request->all());
+        return back();
     }
 
     /**
@@ -46,7 +48,7 @@ class TopicController extends Controller
      */
     public function show(Topic $topic)
     {
-        //
+        return view('topics.show');
     }
 
     /**
@@ -57,7 +59,7 @@ class TopicController extends Controller
      */
     public function edit(Topic $topic)
     {
-        //
+        return back()->with(['topic' => $topic]);
     }
 
     /**

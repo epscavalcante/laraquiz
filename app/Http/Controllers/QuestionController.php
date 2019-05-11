@@ -14,7 +14,19 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        //
+        // $questions = Question::wherehas('options')->with('options')->get();
+
+        // dd($questions);
+
+        // $options = $questions[2]->options->modelKeys();
+
+        // dd($options);
+
+        // $optionCorrect = rand($question->options->first()->id, $question->options->last()->id);
+        // dd(
+        //     $optionCorrect, $question->options
+        // );
+        return view('questions.index')->with(['questions' => Question::with('topic')->get()]);
     }
 
     /**
@@ -46,7 +58,10 @@ class QuestionController extends Controller
      */
     public function show(Question $question)
     {
-        //
+        // dd($question->load(['topic','options', 'optionCorrect']));
+        return view('questions.show')->with([
+            'question' => $question->load(['topic','options', 'optionCorrect'])
+        ]);
     }
 
     /**

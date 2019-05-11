@@ -15,7 +15,11 @@ class CreateResultsTable extends Migration
     {
         Schema::create('results', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('user_id');
+            $table->boolean('correct')->default(false);
             $table->timestamps();
+
+            $table->foreign('user_id')->on('users')->references('id');
         });
     }
 
