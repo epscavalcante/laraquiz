@@ -19,10 +19,11 @@ class CreateQuestionsTable extends Migration
             $table->string('title');
             $table->text('subtitle')->nullable();
             $table->text('explanation')->nullable();
+            $table->boolean('is_homologated')->default(false);
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('topic_id')->on('topics')->references('id');
+            $table->foreign('topic_id')->on('topics')->references('id')->onDelete('cascade');
         });
     }
 

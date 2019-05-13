@@ -20,3 +20,4 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('topics', 'TopicController');
 Route::resource('questions', 'QuestionController');
+Route::resource('options', 'OptionController');

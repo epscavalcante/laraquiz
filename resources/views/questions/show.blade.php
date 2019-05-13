@@ -11,12 +11,21 @@
                 </div>
             </div>
             <div class="card-body">
+
+                @if($question->is_homologated)
+                @else
+                <div class="alert alert-danger float-right">
+                    <strong>Question not homologated</strong>
+                    <a href="{{ route('questions.edit', $question) }}" class="btn btn-sm btn-danger">Editar</a>
+                </div>
+                @endif
+
                 <section class="jumbotron py-3">
 
-                    <header>
-                        <h5><strong>Question {{ $question->id }}:</strong> {{ $question->title }}</h5>
-                        <p><strong>More:</strong> {{ $question->subtitle }}</p>
-                    </header>
+                    <div class="mb-4">
+                        <h5><strong>{{ $question->title }}</strong></h5>
+                        <i>{{ $question->subtitle }}</i>
+                    </div>
 
                     <h6>Options:</h6>
                     

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Question;
 use Illuminate\Http\Request;
+use App\Models\Topic;
+use App\Http\Requests\StoreQuestionRequest;
 
 class QuestionController extends Controller
 {
@@ -14,18 +16,6 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        // $questions = Question::wherehas('options')->with('options')->get();
-
-        // dd($questions);
-
-        // $options = $questions[2]->options->modelKeys();
-
-        // dd($options);
-
-        // $optionCorrect = rand($question->options->first()->id, $question->options->last()->id);
-        // dd(
-        //     $optionCorrect, $question->options
-        // );
         return view('questions.index')->with(['questions' => Question::with('topic')->get()]);
     }
 
@@ -36,7 +26,7 @@ class QuestionController extends Controller
      */
     public function create()
     {
-        //
+        return view('questions.create')->with(['topics' => Topic::all()]);
     }
 
     /**
@@ -45,9 +35,10 @@ class QuestionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreQuestionRequest $request)
     {
-        //
+        Question::create($request->all());
+        return redirect()->route('questions.index');
     }
 
     /**
@@ -58,7 +49,6 @@ class QuestionController extends Controller
      */
     public function show(Question $question)
     {
-        // dd($question->load(['topic','options', 'optionCorrect']));
         return view('questions.show')->with([
             'question' => $question->load(['topic','options', 'optionCorrect'])
         ]);
@@ -72,7 +62,10 @@ class QuestionController extends Controller
      */
     public function edit(Question $question)
     {
-        //
+        return view('questions.edit')->with([
+            'question' => $question->load('options'),
+            'topics' => Topic::all()    
+        ]);
     }
 
     /**
