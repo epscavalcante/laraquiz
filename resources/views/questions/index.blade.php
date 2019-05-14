@@ -25,9 +25,14 @@
                                 <td>{{ $question->title }}</td>
                                 <td>
                                     <div class="btn-group btn-group-sm">
-                                        <a href="{{ route('questions.show', $question) }}" class="btn btn-sm btn-primary">Open</a>
+                                    <a href="{{ route('options.index', $question) }}" class="btn btn-sm btn-dark">Manange options</a>
+                                    <a href="{{ route('questions.show', $question) }}" class="btn btn-sm btn-primary">Open</a>
                                         <a href="{{ route('questions.edit', $question) }}" class="btn btn-sm btn-secondary">Edit</a>
-                                        <a href="" class="btn btn-sm btn-danger">Del</a>
+                                        <form action="{{ route('questions.destroy', $question) }}" method="POST">
+                                            @csrf
+                                            @method("DELETE")
+                                            <button type="submit" class="btn btn-sm btn-danger">Del</button>
+                                        </form>
                                     </div>
                                 </td>
                             </tr>

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Option;
 use Illuminate\Http\Request;
+use App\Models\Question;
+use App\Http\Requests\StoreOptionRequest;
 
 class OptionController extends Controller
 {
@@ -12,9 +14,9 @@ class OptionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Question $question)
     {
-        //
+        return view('questions.options.index')->with(['question' => $question]);
     }
 
     /**
@@ -33,9 +35,10 @@ class OptionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreOptionRequest $request, Question $question)
     {
-        //
+        $question->options()->create($request->all());
+        return back();
     }
 
     /**
