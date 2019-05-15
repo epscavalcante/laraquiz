@@ -24,3 +24,4 @@ Route::group(['prefix' => 'questions/{question}'], function () {
     Route::resource('options', 'OptionController');
 });
 Route::resource('questions', 'QuestionController');
+Route::patch('questions/{question}', 'QuestionController@homologated')->name('questions.homologated');

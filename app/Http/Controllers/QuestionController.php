@@ -92,4 +92,10 @@ class QuestionController extends Controller
         $question->delete();
         return back();
     }
+
+    public function homologated(Question $question)
+    {
+        $question->update(['is_homologated' => true]);
+        return back();
+    }
 }

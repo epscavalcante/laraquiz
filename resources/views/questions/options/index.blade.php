@@ -72,6 +72,15 @@
                 @endforeach
             </table>
         </div>
+        <div class="card-footer">
+            <div class="float-right">
+                <form action="{{ route('questions.homologated', $question) }}" method="POST">
+                    @csrf
+                    @method("PATCH")
+                    <button type="submit" class="btn btn-success">Homologate question</button>
+                </form>
+            </div>
+        </div>
     </div>
 </div>
 @endsection

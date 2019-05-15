@@ -16,7 +16,7 @@
                 @else
                 <div class="alert alert-danger float-right">
                     <strong>Question not homologated</strong>
-                    <a href="{{ route('questions.edit', $question) }}" class="btn btn-sm btn-danger">Editar</a>
+                    <a href="{{ route('options.index', $question) }}" class="btn btn-sm btn-danger">Editar</a>
                 </div>
                 @endif
 
@@ -48,6 +48,7 @@
                     </ul>
                 </section>
             </div>
+            
         </div>
     </div>
 @endsection
