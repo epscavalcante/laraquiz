@@ -28,8 +28,22 @@ class UniqueOptionCorrectRule implements Rule
      */
     public function passes($attribute, $value)
     {
-        // dd($attribute, $value, $this->question);
-        return !Option::where($attribute, $value)->where('question_id', $this->question)->first();
+
+        // dd($attribute, $value);
+
+        if($value){
+            
+            $optionsCorrect = Option::where($attribute, 1)->where('question_id', $this->question)->get();
+            
+            if($optionsCorrect->count() === 0){
+                return true;
+            }
+    
+            return false;
+    
+        }
+
+        return true;
     }
 
     /**
@@ -39,6 +53,6 @@ class UniqueOptionCorrectRule implements Rule
      */
     public function message()
     {
-        return 'The validation error message.';
+        return 'Option correct existing';
     }
 }

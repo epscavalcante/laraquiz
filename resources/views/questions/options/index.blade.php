@@ -24,6 +24,15 @@
 
             <form action="{{ route('options.store', $question) }}" class="mb-4" method="POST">
                 @csrf
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <div class="row">
                     <div class="col-7">
                         <div class="form-group">

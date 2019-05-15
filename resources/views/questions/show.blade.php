@@ -44,7 +44,7 @@
 
                     <ul>
                         <li><strong>Option correct:</strong> {{ $question->optionCorrect->title }}</li>
-                        <li><strong>Explanation:</strong> Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo laboriosam minus rerum aliquam a aliquid maiores sequi, distinctio dolorum, quia officia dicta quas illo qui autem necessitatibus quae laborum quidem?</li>
+                        <li><strong>Explanation:</strong> {{ $question->explanation }}</li>
                     </ul>
                 </section>
             </div>
