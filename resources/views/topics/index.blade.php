@@ -35,6 +35,7 @@
                     <thead>
                         <tr>
                             <th>Topic</th>
+                            <th>Total questions</th>
                             <th>Created_at</th>
                             <th>Updated_at</th>
                             <th width='10'></th>
@@ -44,6 +45,7 @@
                         @foreach ($topics as $topic)
                             <tr class="@if($topic->trashed) table-danger @endif">
                                 <td>{{ $topic->title }}</td>
+                                <td>{{ $topic->questions_count }}</td>
                                 <td>{{ $topic->created_at }}</td>
                                 <td>{{ $topic->updated_at }}</td>
                                 <td>

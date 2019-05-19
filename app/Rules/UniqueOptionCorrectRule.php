@@ -29,7 +29,7 @@ class UniqueOptionCorrectRule implements Rule
     public function passes($attribute, $value)
     {
 
-        // dd($attribute, $value);
+        // dd($attribute, $value, $this->question);
 
         if($value){
             

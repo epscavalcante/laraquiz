@@ -7,6 +7,7 @@ use App\Models\Topic;
 use App\Models\Question;
 use App\Models\Test;
 use App\Models\Option;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -45,10 +46,21 @@ class HomeController extends Controller
                 'title' => 'Options',
                 'counter' => Option::count()
             ]
-            
 
         ];
 
-        return view('home')->with(['data' => $data]);
+        $topics = Topic::all();
+
+        return view('home')->with(['data' => $data, 'topics' => $topics]);
+    }
+
+    public function tests()
+    {
+        return view('tests.index')->with(['tests' => Auth::user()->load("tests")->tests]);
+    }
+
+    public function test(Test $test)
+    {
+        return view('tests.show')->with(['test' => $test->load(["topic.questions.options", "topic.questions.optionCorrect", 'answers'])]);
     }
 }

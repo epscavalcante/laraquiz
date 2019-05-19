@@ -35,6 +35,7 @@
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item"><a href="{{ route('topics.index') }}" class="nav-link">Topics</a></li>
                         <li class="nav-item"><a href="{{ route('questions.index') }}" class="nav-link">Questions</a></li>
+                        <li class="nav-item"><a href="{{ route('myTests.index') }}" class="nav-link">My tests</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

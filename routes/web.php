@@ -11,17 +11,23 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@index');
+Route::get('my-tests', 'HomeController@tests')->name('myTests.index');
+Route::get('my-tests/{test}', 'HomeController@test')->name('myTests.show');
+
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-Route::resource('topics', 'TopicController');
+Route::group(['prefix' => 'admin'], function () {
+    Route::get('/home', 'HomeController@index')->name('home');
+    Route::resource('topics', 'TopicController');
 
-Route::group(['prefix' => 'questions/{question}'], function () {
-    Route::resource('options', 'OptionController');
+    Route::group(['prefix' => 'questions/{question}'], function () {
+        Route::resource('options', 'OptionController');
+    });
+    Route::resource('questions', 'QuestionController');
+    Route::patch('questions/{question}', 'QuestionController@homologated')->name('questions.homologated');
+    // Route::resource('tests', 'TestController');
 });
-Route::resource('questions', 'QuestionController');
-Route::patch('questions/{question}', 'QuestionController@homologated')->name('questions.homologated');
+
+Route::middleware('auth')->resource('tests', 'TestController');

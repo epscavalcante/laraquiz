@@ -15,7 +15,7 @@ class TopicController extends Controller
      */
     public function index()
     {
-        return view('topics.index')->with(['topics' => Topic::all()]);
+        return view('topics.index')->with(['topics' => Topic::withCount('questions')->get()]);
     }
 
     /**
@@ -48,7 +48,12 @@ class TopicController extends Controller
      */
     public function show(Topic $topic)
     {
-        return view('topics.show');
+
+        $topic->load(['questions' => function ($query) {
+            $query->whereIsHomologated(true)->with('options');
+        }]);
+        
+        return view('topics.show')->with(['topic' => $topic]);
     }
 
     /**

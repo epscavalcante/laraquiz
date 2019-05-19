@@ -14,7 +14,7 @@ class TestController extends Controller
      */
     public function index()
     {
-        //
+        return view('tests.index')->with(['tests' => auth()->user()->tests]);
     }
 
     /**
@@ -35,7 +35,26 @@ class TestController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request->all());
+
+        $test = Test::create([
+            'user_id' => auth()->user()->id,
+            'topic_id' => $request->topic_id
+        ]);
+
+        // dd($test);
+
+        foreach($request->answers as $question){
+
+            // dd($question, $request->all());
+            $test->answers()->create([
+                'user_id' => auth()->user()->id,
+                'question_id' => key($question),
+                'option_id' => $question[key($question)]
+            ]);
+        }
+
+        return redirect()->to('/my-tests');
     }
 
     /**
