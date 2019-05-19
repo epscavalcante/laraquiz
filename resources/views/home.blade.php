@@ -2,21 +2,23 @@
 
 @section('content')
 <div class="container">
+    @if(Auth::user()->is_admin)
     <div class="row justify-content-center">
-        @foreach($data as $item)
-        <div class="col-md-3">
-            <div class="card">
-                <div class="card-body">
-                    <h3 class="mb-0 text-muted">{{ $item['title'] }}</h3>
-
-                    <h1 class="float-right mb-0">{{ $item['counter'] }}</h1>
+            @foreach($data as $item)
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="mb-0 text-muted">{{ $item['title'] }}</h3>
+    
+                        <h1 class="float-right mb-0">{{ $item['counter'] }}</h1>
+                    </div>
                 </div>
             </div>
+            @endforeach
         </div>
-        @endforeach
-    </div>
-
-    <hr class="my-5 w-50">
+    
+        <hr class="my-5 w-50">
+    @endif
 
     <div class="card">
         <div class="card-header">

@@ -33,8 +33,13 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
+                        @auth
+                        @if(Auth::user()->is_admin)
                         <li class="nav-item"><a href="{{ route('topics.index') }}" class="nav-link">Topics</a></li>
                         <li class="nav-item"><a href="{{ route('questions.index') }}" class="nav-link">Questions</a></li>
+                        @endif
+                        @endauth
+
                         <li class="nav-item"><a href="{{ route('myTests.index') }}" class="nav-link">My tests</a></li>
                     </ul>
 
